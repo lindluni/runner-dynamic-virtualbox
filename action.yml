@@ -1,0 +1,42 @@
+name: 'VirtualBox Runner'
+description: 'Used to dynamically create and destroy GitHub Actions Runners on a remote host using VirtualBox'
+inputs:
+  image:
+    description: 'Name of existing VM to clone'
+    required: false
+    default: ''
+  host:
+    description: 'Hostname or IP of the VirtualBox Server'
+    required: true
+    default: ''
+  port:
+    description: 'The port of the VirtualBox Server'
+    required: true
+    default: ''
+  action:
+    description: 'The action to perform: create or delete'
+    required: true
+    default: ''
+  prefix:
+    description: 'VirtualBox Required non-numeric Runner prefix'
+    required: true
+    default: vbx
+  id:
+    description: 'The unique name of the test runner'
+    required: true
+    default: ${{ github.run_id }}
+  repo:
+    description: 'The name of the repo: lindluni/runner-virtualbox'
+    required: true
+    default: ${{ github.repository }}
+  token:
+    description: 'Token to authenticate to the GitHub API'
+    required: true
+    default: ''
+  cert:
+    description: 'CA Certificate of the VirtualBox REST server'
+    required: true
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
